@@ -6,29 +6,29 @@ The RESTful API returns a maximum of 500 records on the `getallmeasurements` cal
 
 1. Start a new Python file (`File` > `New File`) and start with the same lines of code you had before.
 
-``` python
-from requests import get
-import matplotlib.pyplot as plt
-from dateutil import parser
+    ``` python
+    from requests import get
+    import matplotlib.pyplot as plt
+    from dateutil import parser
 
-url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
+    url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
 
-weather = get(url).json()
-```
+    weather = get(url).json()
+    ```
 
 1. Save and run the script and then look again at the weather data, by typing `weather` into the shell. Have a look and see if you can see a key called `'next'`. You can look at it on it's own by typing `weather['next'] into the shell.
 
-``` python
-{'$ref': 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722?page=1'}
-```
+    ``` python
+    {'$ref': 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722?page=1'}
+    ```
 
 1. Here you have another dictionary. It contains a single key called `'$ref'` and the value of `'$ref'` is the URL of the next data-set - the next 500 records. You'll notice that the URL ends with `page=1`
 
 1. Let's try a get request of this URL. Into the shell you can type the following:
 
-``` python
-weather2 = get(weather['next']['$ref']).json()
-```
+    ``` python
+    weather2 = get(weather['next']['$ref']).json()
+    ```
 
 1. If the weather station you have chosen has sufficient records, you'll hopefully see that `weather2['next']` gives you another URL to get the next set of records. It also has a `weather2['previous']` to show you the previous URL.
 
@@ -40,51 +40,51 @@ As long as there is a `'next'` key in the weather dictionary, you know there is 
 
 1. So far you should have the following script:
 
-``` python
-from requests import get
-import matplotlib.pyplot as plt
-from dateutil import parser
+    ``` python
+    from requests import get
+    import matplotlib.pyplot as plt
+    from dateutil import parser
 
-url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
+    url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
 
-weather = get(url).json()
-```
+    weather = get(url).json()
+    ```
 
 1. You can add another line to save the first set of data as a list.
 
-``` python
-data = weather['items']
-```
+    ``` python
+    data = weather['items']
+    ```
 
 1. Next you need a `while` loop. This loop should run as long as the `weather` dictionary has a key called `'next'`
 
-``` python
-while 'next' in weather:
-```
+    ``` python
+    while 'next' in weather:
+    ```
 
 1. If there is a `'next'` key, then the new `url` can be found that leads to the second page.
 
-``` python
-    url = weather['next']['$ref']
-```
+    ``` python
+        url = weather['next']['$ref']
+    ```
 
 1. It might be a good idea to add a little print statement in here, just to act as a kind of progress meter. This will tell us which page is being downloaded.
 
-``` python
-    print('Fetching {0}'.format(url))
-```
+    ``` python
+        print('Fetching {0}'.format(url))
+    ```
 
 1. Then the data can be fetched, just like it was before.
 
-``` python
-    weather = get(url).json()
-```
+    ``` python
+        weather = get(url).json()
+    ```
 
 1. Lastly, the list withing the `weather` dictionary from this page, can be added to the original page's data.
 
-``` python
-    data += weather['items']
-```
+    ``` python
+        data += weather['items']
+    ```
 
 1. You can try to save and run this program. If it's taking too long for your liking however, you can exit the script (`ctrl` + `c`) and proceed to the next section.
 
@@ -94,21 +94,21 @@ The weather stations take a new reading from their sensors every 10 minutes. Tha
 
 1. A simple `pages` variable can be used to make sure we only grab 9 pages of data. Somewhere above the `while` loop add the following line:
 
-``` python
-pages = 1
-```
+    ``` python
+    pages = 1
+    ```
 
 1. Then alter the `while` loop so it looks like this:
 
-``` python
-while 'next' in weather and pages < 9:
-```
+    ``` python
+    while 'next' in weather and pages < 9:
+    ```
 
 1. Then somewhere within the `while` loop, you need to increment `pages`.
 
-``` python
-    pages += 1
-```
+    ``` python
+        pages += 1
+    ```
 
 1. Saving and running this code, should fetch 9 pages in total. If you type `len(data)` into the shell, you should see the value 4500 returned (assuming the weather station you have chosen has been active for over a month).
 
