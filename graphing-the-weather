@@ -1,0 +1,17 @@
+  /home/mjs/Resources/graphing-the-weather:
+  total used in directory 236 available 61056740
+  drwxrwxr-x 5 mjs mjs  4096 Nov 18 10:12 .
+  drwxrwxr-x 6 mjs mjs  4096 Nov 16 14:23 ..
+  drwxrwxr-x 2 mjs mjs  4096 Nov 17 17:06 code
+  -rw-rw-r-- 1 mjs mjs  1561 Nov 16 14:23 CONTRIBUTING.md
+  drwxrwxr-x 8 mjs mjs  4096 Nov 18 10:14 .git
+  drwxrwxr-x 2 mjs mjs  4096 Nov 17 17:05 images
+  -rw-rw-r-- 1 mjs mjs   257 Nov 16 14:23 learn.md
+  -rw-rw-r-- 1 mjs mjs   524 Nov 16 14:23 LICENCE.md
+  -rw-rw-r-- 1 mjs mjs    39 Nov 16 14:23 meta.yml
+  -rw-rw-r-- 1 mjs mjs   142 Nov 16 14:23 overview.md
+  -rw-rw-r-- 1 mjs mjs   596 Nov 16 14:23 README.md
+  -rw-rw-r-- 1 mjs mjs   194 Nov 16 14:23 software.md
+  -rw-rw-r-- 1 mjs mjs    40 Nov 16 14:23 software.yml
+  -rw-rw-r-- 1 mjs mjs  5679 Nov 18 10:11 worksheet2.md
+  -rw-rw-r-- 1 mjs mjs  8752 Nov 18 10:08 worksheet.md

@@ -1,1 +1,1 @@
-In this resource you will make a something do a something so that your something can do something and use something to control the something.
+In this resource you will gather weather data from the Raspberry Pi Weather Database, and use it to create graphs of sensor data over time.
