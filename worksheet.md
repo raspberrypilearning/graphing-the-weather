@@ -28,7 +28,14 @@ With a growing number of Weather Stations coming online each week, there are ple
 Here is a list of some of the IDs of active Weather Stations, as of November 2016:
 
 ``` python
-[490722, 505307, 505367, 506882, 509944, 515967, 519781, 520153, 520275, 524920, 526297, 528071, 541759, 552355, 553997, 562837, 586603, 586921, 587328, 591441, 595131, 595229, 638013, 667858, 668306, 714944, 748308, 860212, 903578, 903675, 906364, 1023840, 1042161, 1073533, 1100597, 1101852, 1111673, 1158690, 1195685, 1212453, 1253673, 1261471, 1269584, 1307290, 1355086, 1356217, 1373810, 1406723, 1546872, 1551853, 1569432, 1569473, 1572018, 1592317, 1598227, 1604642, 1615966, 1621459, 1624210, 1648902, 1674106, 1682287, 1683740]
+[490722, 505307, 505367, 506882, 509944, 515967, 519781, 520153, 
+520275, 524920, 526297, 528071, 541759, 552355, 553997, 562837, 586603, 
+586921, 587328, 591441, 595131, 595229, 638013, 667858, 668306, 714944, 
+748308, 860212, 903578, 903675, 906364, 1023840, 1042161, 1073533, 
+1100597, 1101852, 1111673, 1158690, 1195685, 1212453, 1253673, 1261471, 
+1269584, 1307290, 1355086, 1356217, 1373810, 1406723, 1546872, 1551853, 
+1569432, 1569473, 1572018, 1592317, 1598227, 1604642, 1615966, 1621459, 
+1624210, 1648902, 1674106, 1682287, 1683740]
 ```
 
 ## Getting ready
@@ -47,7 +54,7 @@ You need to add the ID of the Weather Station to the end of this. In this resour
 
 1. You're going to need access to three modules for this resource, two of which are not included in the standard Python library, so make sure you've followed the instructions on the [Software](https://github.com/raspberrypilearning/graphing-the-weather/blob/master/software.md) page of the resource to install them.
 
-The `requests` module handles HTTP calls, which we'll need to fetch web pages. `matplotlib` is a library that allows you to draw graphs in Python. `dateutil` is a module that allows you to convert dates to different formats.
+    The `requests` module handles HTTP calls, which we'll need to fetch web pages. `matplotlib` is a library that allows you to draw graphs in Python. `dateutil` is a module that allows you to convert dates to different formats.
 
 1. Type the following code into your Python file, to import the needed functions and methods:
 
@@ -107,13 +114,13 @@ Staying in the shell for now, you can experiment a little to see what data you c
     {'ground_temp': 9.56, 'air_quality': 76.23, 'created_on': '2016-11-17T11:00:01Z', 'created_by': 'JimStation1', 'ambient_temp': 10.99, 'wind_direction': 327.97, 'rainfall': 0, 'updated_by': 'JimStation1', 'air_pressure': 998.6, 'reading_timestamp': '2016-11-17T11:00:01Z', 'updated_on': '2016-11-17T11:07:22.332Z', 'wind_speed': 2.76, 'id': 1681292, 'wind_gust_speed': 8.16, 'weather_stn_id': 490722, 'humidity': 63.72}
     ```
 
-This is all the sensor data that was recorded for that specific time. As you can see, it's another dictionary, consisting of key:value pairs. If you wanted to find the ambient air temperature specifically, for instance, you could write the following:
+    This is all the sensor data that was recorded for that specific time. As you can see, it's another dictionary, consisting of key:value pairs. If you wanted to find the ambient air temperature specifically, for instance, you could write the following:
 
     ``` python
     weather['items'][0]['ambient_temp']
     ```
 
-Similarly, the temperature would be `[weather['items'][0]['reading_timestamp']`.
+    Similarly, the temperature would be `[weather['items'][0]['reading_timestamp']`.
 
 1. To extract all the temperatures from the `weather` data set, you could use a `for` loop to iterate over the data and pick out all the temperature readings. Something like this would work:
 
@@ -124,7 +131,7 @@ Similarly, the temperature would be `[weather['items'][0]['reading_timestamp']`.
         temperatures.append(temperature)
     ```
 
-A list comprehension does the same thing, but in far fewer lines:
+    A list comprehension does the same thing, but in far fewer lines:
 
     ``` python
     temperatures = [record['ambient_temp'] for record in weather['items']]
@@ -136,7 +143,7 @@ A list comprehension does the same thing, but in far fewer lines:
     timestamps = [record['reading_timestamp'] for record in weather['items']]
     ```
 
-There's a small problem, though. The date format used by the database is called the ISO 8601 format. This is a little hard to use in Python, so it needs to be changed to a `datetime` object that Python can easily read. You can do this by passing the timestamp into `parser.parse()` before adding it to a list. For instance, try writing the following in the shell:
+    There's a small problem, though. The date format used by the database is called the ISO 8601 format. This is a little hard to use in Python, so it needs to be changed to a `datetime` object that Python can easily read. You can do this by passing the timestamp into `parser.parse()` before adding it to a list. For instance, try writing the following in the shell:
 
     ``` python
     parser.parse(weather['items'][0]['reading_timestamp'])
@@ -176,12 +183,12 @@ timestamps = [parser.parse(record['reading_timestamp']) for record in weather['i
 
 1. If you want to add labels to your axes, then you could add the an extra two lines:
 
-``` python
-plt.plot(timestamps, temperatures)
-plt.ylabel('Temperature')
-plt.xlabel('Time')
-plt.show()
-```
+    ``` python
+    plt.plot(timestamps, temperatures)
+    plt.ylabel('Temperature')
+    plt.xlabel('Time')
+    plt.show()
+    ```
 
 And now you have a graph showing temperature against time. Why not try and use some different sensor measurements, and see what your graph looks like?
 
