@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 #import matplotlib.dates as mdates
 from dateutil import parser
 
-url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
+url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/505307'
 
 pages = 1
 weather = get(url).json()

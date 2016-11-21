@@ -145,6 +145,8 @@ plt.xlabel('date and time')
 plt.show()
 ```
 
+![year](images/year.png)
+
 ## What next?
 
 Have a go at graphing different sensors, and see what patterns you can spot. You can also try accessing different Weather Stations.
