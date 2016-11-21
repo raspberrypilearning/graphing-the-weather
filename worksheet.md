@@ -48,7 +48,7 @@ To use a RESTful API, you first need to know which URL to target. In this case, 
 https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/
 ```
 
-You need to add the ID of the Weather Station to the end of this. In this resource, we'll be using Weather Station `490722`, but you can use any Weather Station you wish.
+You need to add the ID of the Weather Station to the end of this. In this resource, we'll be using Weather Station `505307`, but you can use any Weather Station you wish.
 
 1. Open up a Python shell by clicking on `Menu` > `Programming` > `Python 3 (IDLE)`, then create a new file by clicking on `File` > `New File`.
 
@@ -71,7 +71,7 @@ It actually only takes two lines of code to fetch your first set of weather data
 1. The first thing to do is declare a variable to store the URL for the API call. Don't forget to change the station ID if you want to use a different Weather Station.
 
     ``` python
-    url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
+    url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/505307'
     ```
 
 1. Next, you can make the call to the API:
@@ -164,7 +164,7 @@ from requests import get
 import matplotlib.pyplot as plt
 from dateutil import parser
 
-url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
+url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/505307'
 
 weather = get(url).json()
 
