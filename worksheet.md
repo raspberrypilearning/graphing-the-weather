@@ -190,7 +190,7 @@ timestamps = [parser.parse(record['reading_timestamp']) for record in weather['i
     plt.show()
     ```
 
-![graph](today.png)
+![graph](images/today.png)
 
 And now you have a graph showing temperature against time. Why not try and use some different sensor measurements, and see what your graph looks like?
 
