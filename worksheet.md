@@ -50,7 +50,7 @@ https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/
 
 You need to add the ID of the Weather Station to the end of this. In this resource, we'll be using Weather Station `505307`, but you can use any Weather Station you wish.
 
-1. Open up a Python shell by clicking on `Menu` > `Programming` > `Python 3 (IDLE)`, then create a new file by clicking on `File` > `New File`.
+1. Open up a Python shell by clicking on `Menu` > `Programming` > `Python 3 (IDLE)`, then create a new file by clicking on `File` > `New File`. (The `Menu` is the Raspberry Pi logo in the top-left corner of the screen.)
 
 1. You're going to need access to three modules for this resource, two of which are not included in the standard Python library, so make sure you've followed the instructions on the [Software](https://github.com/raspberrypilearning/graphing-the-weather/blob/master/software.md) page of the resource to install them.
 
@@ -90,10 +90,10 @@ A dictionary is a Python data structure consisting of `keys` and `values`. You c
 
 If you look at the weather data, you'll notice that the first and last characters are `{` and `}`, so the entire set of data that you've downloaded is a single dictionary. The key you're interested in is called `'items'`.
 
-1. In the shell you can get the value of this key by typing the following:
+1. In the shell you can get the value of this key by typing the following (The `>>>` are there by default):
 
     ``` python
-    weather['items']
+    >>> weather['items']
     ```
 
 You should see that this returns a list surrounded by `[` and `]`, and the list itself contains even more dictionaries. Each of these dictionaries is a `record` from the database, and contains all the weather data recorded at that specific time.
@@ -105,26 +105,32 @@ Staying in the shell for now, you can experiment a little to see what data you c
 1. Type the following into the shell to get the first record:
 
     ``` python
-    first_record = weather['items'][0]
+    >>> first_record = weather['items'][0]
     ```
 
 1. Now type `first_record` and you should see something like this:
 
     ``` python
-    {'ground_temp': 9.56, 'air_quality': 76.23, 'created_on': '2016-11-17T11:00:01Z', 'created_by': 'JimStation1', 'ambient_temp': 10.99, 'wind_direction': 327.97, 'rainfall': 0, 'updated_by': 'JimStation1', 'air_pressure': 998.6, 'reading_timestamp': '2016-11-17T11:00:01Z', 'updated_on': '2016-11-17T11:07:22.332Z', 'wind_speed': 2.76, 'id': 1681292, 'wind_gust_speed': 8.16, 'weather_stn_id': 490722, 'humidity': 63.72}
+    {'ground_temp': 9.56, 'air_quality': 76.23, 'created_on': '2016-11-17T11:00:01Z',
+	'created_by': 'JimStation1', 'ambient_temp': 10.99, 'wind_direction': 327.97,
+	'rainfall': 0, 'updated_by': 'JimStation1', 'air_pressure': 998.6,
+	'reading_timestamp': '2016-11-17T11:00:01Z', 'updated_on': '2016-11-17T11:07:22.332Z',
+	'wind_speed': 2.76, 'id': 1681292, 'wind_gust_speed': 8.16, 'weather_stn_id': 490722,
+	'humidity': 63.72}
     ```
 
     This is all the sensor data that was recorded for that specific time. As you can see, it's another dictionary, consisting of key:value pairs. If you wanted to find the ambient air temperature specifically, for instance, you could write the following:
 
     ``` python
-    weather['items'][0]['ambient_temp']
+    >>> weather['items'][0]['ambient_temp']
     ```
 
-    Similarly, the temperature would be `[weather['items'][0]['reading_timestamp']`.
+   S imilarly, the time and date  would be `[weather['items'][0]['reading_timestamp']`.
 
-1. To extract all the temperatures from the `weather` data set, you could use a `for` loop to iterate over the data and pick out all the temperature readings. Something like this would work:
+1. Now go back to your file, so that you can add to your code. To extract all the temperatures from the `weather` data set, you could use a `for` loop to iterate over the data and pick out all the temperature readings. Something like this would work:
 
     ``` python
+	## Use a for loop to iterate over the temperatures and add to a list
     temperatures = []
     for record in weather['data']:
         temperature = record['ambient_temp']
@@ -134,24 +140,27 @@ Staying in the shell for now, you can experiment a little to see what data you c
     A list comprehension does the same thing, but in far fewer lines:
 
     ``` python
+	## list comprehension to get all the temperatures in a list
     temperatures = [record['ambient_temp'] for record in weather['items']]
     ```
 
 1. Either method is fine. You now need to do the same thing for the timestamps. You could simply write this:
 
     ``` python
+	## list comprehension to get all the timestamps in a list
     timestamps = [record['reading_timestamp'] for record in weather['items']]
     ```
 
     There's a small problem, though. The date format used by the database is called the ISO 8601 format. This is a little hard to use in Python, so it needs to be changed to a `datetime` object that Python can easily read. You can do this by passing the timestamp into `parser.parse()` before adding it to a list. For instance, try writing the following in the shell:
 
     ``` python
-    parser.parse(weather['items'][0]['reading_timestamp'])
+    >>> parser.parse(weather['items'][0]['reading_timestamp'])
     ```
 
 1. You should see a `datetime` object returned. You can add this to your list comprehension now to give the following:
 
 ``` python
+## list comprehension to get all the temperatures in a list in a readable format
 timestamps = [parser.parse(record['reading_timestamp']) for record in weather['items']]
 ```
 
@@ -166,7 +175,7 @@ from dateutil import parser
 
 url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/505307'
 
-weather = get(url).json()
+wsimeather = get(url).json()
 
 temperatures = [record['ambient_temp'] for record in weather['items']]
 timestamps = [parser.parse(record['reading_timestamp']) for record in weather['items']]
@@ -175,6 +184,7 @@ timestamps = [parser.parse(record['reading_timestamp']) for record in weather['i
 1. To graph the data, you only need three lines of code. The first will state the two sets of data you're plotting, and the second will display the data:
 
     ``` python
+	## create a plot of timestamps against temperature and show it
     plt.plot(timestamps, temperatures)
     plt.show()
     ```
@@ -185,6 +195,7 @@ timestamps = [parser.parse(record['reading_timestamp']) for record in weather['i
 
     ``` python
     plt.plot(timestamps, temperatures)
+	## Set the axis labels
     plt.ylabel('Temperature')
     plt.xlabel('Time')
     plt.show()
