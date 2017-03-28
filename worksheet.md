@@ -23,7 +23,7 @@ In this resource you're going to choose a Weather Station, and then bulk downloa
 
 ## Choosing a Weather Station
 
-With a growing number of Weather Stations coming online each week, there are plenty to choose from. You can follow the [Fetching the Weather]() resource to choose a specific Weather Station close to you if you like, or you could simply use the one provided in the examples in this resource.
+With a growing number of Weather Stations coming online each week, there are plenty to choose from. You can follow the [Fetching the Weather](https://github.com/raspberrypilearning/fetching-the-weather) resource to choose a specific Weather Station close to you if you like, or you could simply use the one provided in the examples in this resource.
 
 Here is a list of some of the IDs of active Weather Stations, as of November 2016:
 
