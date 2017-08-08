@@ -22,10 +22,8 @@ steps:
 - title: Fetching your first data set
 - title: Looking at JSON
 - title: Getting the time and temperature
-- title: list comprehension to get all the temperatures in a list in a readable format
 - title: Graphing the data
-- title: What next?
-- title: Graphing the weather
+- title: Getting more data
 - title: Finding more pages
 - title: Fetching all the pages
 - title: Limiting the data downloaded

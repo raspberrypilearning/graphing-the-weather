@@ -1,9 +1,7 @@
 ## What you will need
 
-
-
 ### Software
-
+- Matplotlib
 #### Software installation
 
 To install the software you need, run the following commands in a terminal (hold `ctrl` + `alt` + `t`):

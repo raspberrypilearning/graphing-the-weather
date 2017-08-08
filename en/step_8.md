@@ -60,3 +60,6 @@ Staying in the shell for now, you can experiment a little to see what data you c
 - You should see a `datetime` object returned. You can add this to your list comprehension now to give the following:
 
 ``` python
+## list comprehension to get all the temperatures in a list in a readable format
+timestamps = [parser.parse(record['reading_timestamp']) for record in weather['items']]
+```

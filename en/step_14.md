@@ -1,54 +1,35 @@
-## Fetching all the pages
+## Finishing off with a graph
 
-As long as there's a `'next'` key in the weather dictionary, you know there's more data to fetch. You can use this fact to collect all the data.
+You can now use the same code from Worksheet One to produce a graph of your data. Your list comprehensions will need to be a little different this time, as you're looking at extracting the temperatures and timestamps from the giant `data` list.
 
-So far, you should have the following script:
+Your entire script should then look something like this:
 
-    ``` python
-    from requests import get
-    import matplotlib.pyplot as plt
-    from dateutil import parser
+``` python
+from requests import get
+import matplotlib.pyplot as plt
+from dateutil import parser
 
-    url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
+url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/490722'
 
+pages = 1
+weather = get(url).json()
+data = weather['items']
+
+while 'next' in weather and pages < 9:    
+    url = weather['next']['$ref']
+    print('Fetching {0}'.format(url))
     weather = get(url).json()
-    ```
+    data += weather['items']
+    pages += 1
 
-- You can add another line to save the first set of data as a list:
+temperatures = [record['ambient_temp'] for record in data]
+timestamps = [parser.parse(record['reading_timestamp']) for record in data]
 
-    ``` python
-    data = weather['items']
-    ```
+plt.plot(timestamps, temperatures)
+plt.ylabel('Temperature')
+plt.xlabel('date and time')
+plt.show()
+```
 
-- Next, you need a `while` loop. This loop should run as long as the `weather` dictionary has a key called `'next'`:
-
-    ``` python
-    while 'next' in weather:
-    ```
-
-- If there's a `'next'` key, then the new `url` can be found that leads to the second page:
-
-    ``` python
-        url = weather['next']['$ref']
-    ```
-
-- It might be a good idea to add a little `print` statement in here, just to act as a kind of progress meter. This will tell us which page is being downloaded:
-
-    ``` python
-        print('Fetching {0}'.format(url))
-    ```
-
-- Then the data can be fetched, just like it was before:
-
-    ``` python
-        weather = get(url).json()
-    ```
-
-- Lastly, the list within the `weather` dictionary from this page can be added to the original page's data:
-
-    ``` python
-        data += weather['items']
-    ```
-
-- You can try to save and run this program. If it's taking too long for your liking, you can exit the script (`Ctrl` + `C`) and proceed to the next section.
+![year](images/year.png)
 
