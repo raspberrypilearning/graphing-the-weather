@@ -9,7 +9,7 @@ from dateutil import parser
 
 url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallmeasurements/505307'
 
-wsimeather = get(url).json()
+weather = get(url).json()
 
 temperatures = [record['ambient_temp'] for record in weather['items']]
 timestamps = [parser.parse(record['reading_timestamp']) for record in weather['items']]
