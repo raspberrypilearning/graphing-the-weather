@@ -1,7 +1,8 @@
 ---
 title: Graphing the weather
 hero_image: images/banner.png
-description: Learn how to plot graphical weather data from the Raspberry Pi Weather Station database
+description: Learn how to plot graphical weather data from the Raspberry Pi Weather
+  Station database
 original_url: https://raspberrypi.org/learning/graphing-the-weather
 theme: turquoise
 duration: 2
@@ -16,9 +17,10 @@ hardware: ''
 software: python
 version: 3
 last_tested: 2017-01-01
-steps: 
+steps:
 - title: Introduction
 - title: What you will need
+  completion: engaged
 - title: Graphing the weather
 - title: Choosing a Weather Station
 - title: Getting ready
@@ -30,5 +32,6 @@ steps:
 - title: Finding more pages
 - title: Fetching all the pages
 - title: Limiting the data downloaded
+  completion: internal
 - title: Finishing off with a graph
 - title: What next?
