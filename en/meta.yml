@@ -20,9 +20,10 @@ last_tested: 2017-01-01
 steps:
 - title: Introduction
 - title: What you will need
-  completion: engaged
 - title: Graphing the weather
 - title: Choosing a Weather Station
+  completion:
+  - engaged
 - title: Getting ready
 - title: Fetching your first data set
 - title: Looking at JSON
@@ -32,6 +33,7 @@ steps:
 - title: Finding more pages
 - title: Fetching all the pages
 - title: Limiting the data downloaded
-  completion: internal
 - title: Finishing off with a graph
+  completion:
+  - internal
 - title: What next?
